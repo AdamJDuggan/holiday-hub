@@ -1,0 +1,38 @@
+@import "../../styles/colors.scss";
+
+.button {
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  min-width: 90px;
+}
+
+.primary {
+  background-color: $primary !important;
+  color: $light;
+  &:hover {
+    color: $tertiary;
+  }
+}
+
+.secondary {
+  background-color: $secondary !important;
+  color: $light;
+  &:hover {
+    background-color: $tertiary !important;
+    color: $dark;
+  }
+}
+
+.sm {
+  padding: 8px;
+}
+.md {
+  padding: 8px 12px;
+  font-size: 20px;
+}
+
+.lg {
+  padding: 64px;
+  font-size: 24px;
+}
