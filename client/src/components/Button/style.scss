@@ -11,16 +11,16 @@
   background-color: $primary !important;
   color: $light;
   &:hover {
-    color: $tertiary;
+    color: $tertiary !important;
   }
 }
 
 .secondary {
   background-color: $secondary !important;
-  color: $light;
+  color: $light !important;
   &:hover {
     background-color: $tertiary !important;
-    color: $dark;
+    color: $dark !important;
   }
 }
 
@@ -29,7 +29,7 @@
 }
 .md {
   padding: 8px 12px;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .lg {

@@ -1,7 +1,7 @@
-$primary: #227C9D;
-$secondary: #17C3B2;
-$tertiary: #FFCB77;
-$light: #FEF9EF;
+$primary: #7207bf;
+$secondary: #0e46e1;
+$tertiary: #ffcb77;
+$light: #fef9ef;
 $dark: #363636;
 
 $colors: (
@@ -11,7 +11,6 @@ $colors: (
   light: $light,
   dark: $dark,
 );
-
 
 @each $colorname, $color in $colors {
   .bg-#{$colorname} {
@@ -24,5 +23,4 @@ $colors: (
   .b-#{$colorname} {
     border-color: $color;
   }
-
 }
