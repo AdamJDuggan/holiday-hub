@@ -1,0 +1,26 @@
+.table {
+  overflow-x: scroll;
+  font-weight: 100;
+  border-radius: 6px;
+  font-weight: 100;
+
+  thead th,
+  tbody th {
+    padding: 8px 20px;
+  }
+  tfoot div {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 12px;
+    margin: 0;
+    span {
+      margin-left: 12px;
+    }
+  }
+
+  tbody {
+    th {
+      font-weight: 400;
+    }
+  }
+}

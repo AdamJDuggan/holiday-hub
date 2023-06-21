@@ -1,0 +1,141 @@
+// 3rd party
+import classnames from "classnames";
+// Models
+import SurveyOption from "../../models/SurveyOption.tsx";
+import SurveyModel from "../../models/Survey.tsx";
+// Components
+import Icon from "../Icon";
+// Utils
+import displayDate from "../../utils/formatDate.tsx";
+// Styles
+import styles from "./style.scss";
+
+const classes = classnames(styles, "table");
+
+const authId = "user4";
+
+const optionOne = {
+  id: "option1",
+  start: new Date(),
+  end: new Date("June 20, 2023 11:00"),
+  description: "This is our prefered option",
+  accept: ["user1", "user4"],
+  decline: ["user2"],
+};
+const optionTwo = {
+  id: "option2",
+  title: "Option 2",
+  start: new Date(),
+  end: new Date("June 20, 2023 11:00"),
+  accept: ["user1", "user2"],
+  decline: ["user4"],
+};
+
+interface Member {
+  id: string;
+  name: string;
+}
+
+const options: SurveyOption[] = [
+  optionOne,
+  optionTwo,
+  {
+    ...optionTwo,
+    id: "option3",
+    accept: ["user1", "user2", "user4"],
+    decline: [],
+    title: "Option 3",
+  },
+];
+
+const members: Member[] = [
+  { id: "user1", name: "Karin" },
+  { id: "user2", name: "ChunLi" },
+  { id: "user4", name: "Ryu" },
+  { id: "user3", name: "Blanka" },
+];
+
+const survey: SurveyModel = {
+  options: [
+    optionOne,
+    optionTwo,
+    {
+      ...optionTwo,
+      id: "option3",
+      accept: ["user1", "user2", "user4"],
+      decline: [],
+      title: "Option 3",
+    },
+  ],
+  members: [
+    { id: "user1", name: "Karin" },
+    { id: "user2", name: "ChunLi" },
+    { id: "user4", name: "Ryu" },
+    { id: "user3", name: "Blanka" },
+  ],
+  dateType: "date",
+};
+
+console.log(survey);
+
+export default function Survey() {
+  return (
+    <div className="grid place-items-center overflow-scroll">
+      <div className="container ">
+        <h2>Spain 2024</h2>
+        <table className={classes}>
+          <thead className="font-bold">
+            <th>Member</th>
+            {options.map((option) => (
+              <th key={option.id}>
+                {option.title || displayDate("date", option.start)}
+              </th>
+            ))}
+          </thead>
+
+          <tbody>
+            {survey.members.map((member) => {
+              // Updated
+              const isUser = authId === member.id;
+              return (
+                <tr className={classnames(isUser && "bg-purple-100")}>
+                  <th className="font-bold">{member.name}</th>
+                  {options.map((option) => {
+                    const accepted = option.accept.includes(member.id);
+                    const declined = option.decline.includes(member.id);
+                    return (
+                      <th key={option.id}>
+                        {authId === member.id ? (
+                          <input type="checkbox" checked={accepted} />
+                        ) : (
+                          <Icon
+                            icon={accepted ? "tick" : declined ? "cross" : ""}
+                          />
+                        )}
+                      </th>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+            <tr>
+              <th>Total</th>
+              {survey.options.map((option) => (
+                <th className="p-0 text-xs text-start space-y-2">
+                  <strong>{option.title || "Date"}</strong>
+                  <div>Accept: {option.accept.length}</div>
+                  <div>Decline: {option.decline.length}</div>
+                  <div>
+                    Yet to answer:{" "}
+                    {members.length -
+                      (option.accept.length + option.decline.length)}
+                  </div>
+                </th>
+              ))}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}

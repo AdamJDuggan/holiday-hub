@@ -8,15 +8,21 @@ import {
   faCircleCheck,
   faH,
   faSpinner,
+  faCheck,
+  faXmark,
+  faQuestion,
 } from "@fortawesome/free-solid-svg-icons";
 
 const icons = {
   check: faCircleCheck,
+  cross: faXmark,
   h: faH,
   spinner: faSpinner,
+  tick: faCheck,
+  question: faQuestion,
 };
 
-const Icon = (props) => {
+const Icon = (props: any) => {
   const { icon, className, size, color, onClick } = props;
   return icons[icon] ? (
     <FontAwesomeIcon

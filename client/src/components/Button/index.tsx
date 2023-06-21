@@ -1,6 +1,4 @@
 // React
-import React from "react";
-import PropTypes from "prop-types";
 // 3rd party
 import classnames from "classnames";
 // Components
@@ -8,7 +6,20 @@ import Icon from "../Icon/index.js";
 // Styles
 import style from "./style.scss";
 
-export default function Button(props: any) {
+interface Props {
+  type: "button" | "submit";
+  kind: "primary" | "secondary";
+  label: string;
+  href: string;
+  className?: string;
+  styles?: object;
+  size?: "sm" | "md" | "lg";
+  pending?: boolean;
+  disabled?: boolean;
+  onClick?: any;
+}
+
+export default function Button(props: Props) {
   const {
     type,
     kind,
@@ -21,19 +32,18 @@ export default function Button(props: any) {
     onClick,
   } = props;
 
-  const classes = [
+  const classes = classnames(
     style,
     kind,
     size,
     "button shadow-xl relative",
-    disabled && "opacity-80, pointer-events-none",
+    disabled && "opacity-75 cursor-not-allowed",
     pending && "opacity-90 cursor-progress",
-    className,
-  ];
-
+    className
+  );
   if (href)
     return (
-      <a href={href} className={classnames(...classes)}>
+      <a href={href} className={classes}>
         {label}
       </a>
     );
@@ -42,13 +52,12 @@ export default function Button(props: any) {
     <button
       type={type}
       onClick={onClick}
-      className={classnames(...classes)}
+      className={classes}
       disabled={disabled}
     >
       <span className={classnames(pending && "opacity-0")}>{label}</span>
       {pending && (
         <div className="absolute grid place-items-center h-full w-full">
-          {" "}
           <Icon
             icon="spinner"
             className="relative animate-spin absolute inset-0"
@@ -59,23 +68,9 @@ export default function Button(props: any) {
   );
 }
 
-Button.propTypes = {
-  type: PropTypes.oneOf(["button", "submit"]).isRequired,
-  kind: PropTypes.oneOf(["primary", "secondary"]).isRequired,
-  label: PropTypes.string,
-  className: PropTypes.string,
-  styles: PropTypes.object,
-  size: PropTypes.oneOf(["sm", "md", "lg"]),
-  pending: PropTypes.bool,
-  disabled: PropTypes.bool,
-  onClick: PropTypes.func,
-};
-
 Button.defaultProps = {
   type: "button",
   kind: "primary",
   size: "md",
-  className: "",
-  pending: false,
   onClick: () => alert("Set button onClick"),
 };

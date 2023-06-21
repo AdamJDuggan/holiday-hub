@@ -6,7 +6,7 @@ import classnames from "classnames";
 // Components
 import LogoIcon from "../LogoIcon/index.js";
 // Routes
-import routes from "../../routes.js";
+import routes from "../../routes.tsx";
 // Styles
 import styles from "./index.module.scss";
 // Utils
