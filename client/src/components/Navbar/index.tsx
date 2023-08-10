@@ -1,5 +1,5 @@
 // React
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 // 3rd party
 import classnames from "classnames";
@@ -11,6 +11,8 @@ import routes from "../../routes.tsx";
 import styles from "./index.module.scss";
 // Utils
 import formatLink from "../../utils/formatLink.js";
+// Hooks
+import useWindowSize from "../../hooks/useWindowSize.js";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -24,6 +26,12 @@ export default function Navbar() {
         : [routes.LOGIN, routes.SIGNUP],
     []
   );
+
+  const { isMedium } = useWindowSize();
+
+  useEffect(() => {
+    if (open && !isMedium) setOpen(false);
+  }, [open, isMedium]);
 
   return (
     <div
@@ -49,14 +57,14 @@ export default function Navbar() {
             {/* Links- display on larger screens */}
             <div className="hidden md:inline flex space-x-6">
               {links.map((link) => (
-                <a key={link} href={link.href} className="text-white">
+                <a key={link} href={link} className="text-white">
                   {formatLink(link)}
                 </a>
               ))}
             </div>
             {/* Hamburger button to open nav menu on mobile */}
             <button
-              type="menu"
+              type="button"
               className={classnames(
                 "md:hidden text-white transition ease-in-out",
                 styles.hamburger
@@ -72,7 +80,7 @@ export default function Navbar() {
       </div>
       <div
         className={classnames(
-          "fixed top-0 left-0 w-[100vw] h-[100vh] z-20 flex justify-center text-light",
+          "fixed top-0 left-0 w-[100vw] h-[100vh] z-20 flex justify-center text-light md:hidden",
           !open && "pointer-events-none"
         )}
       >

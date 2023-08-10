@@ -33,7 +33,7 @@ interface DateCardProps {
 }
 export default function DataCard(props: DateCardProps) {
   return (
-    <div className="p-2 px-3 rounded shadow-xl bg-white inline-flex space-x-3 items-center text-[10px]">
+    <div className="p-2 px-3 inline-flex space-x-3 items-center">
       <Date
         showTime={props.showTime}
         showYear={props.showYear}

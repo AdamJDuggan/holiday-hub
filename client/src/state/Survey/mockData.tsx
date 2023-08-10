@@ -45,6 +45,7 @@ const members: Member[] = [
 ];
 
 const survey: SurveyModel = {
+  title: "Spain 2024",
   options: [
     {
       id: "option1",
@@ -71,7 +72,6 @@ const survey: SurveyModel = {
     },
   ],
   members,
-  dateType: "date",
 };
 
 export default survey;

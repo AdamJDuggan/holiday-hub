@@ -3,8 +3,8 @@ import classnames from "classnames";
 // Models
 import SurveyOption from "../../models/SurveyOption.tsx";
 import SurveyModel from "../../models/Survey.tsx";
-
 // Components
+import DateCard from "../DateCard";
 import Icon from "../Icon";
 // Utils
 import displayDate from "../../utils/formatDate.tsx";
@@ -31,11 +31,7 @@ export default function Survey(props: SurveyProps) {
             {survey.options.map((option: SurveyOption) => (
               <th className="border" key={option.id}>
                 {option.title || (
-                  <span>
-                    &nbsp;&nbsp;{displayDate("date", option.start)}
-                    <br />- {/* <br /> */}
-                    {displayDate("date", option.end)}
-                  </span>
+                  <DateCard date={option.start} endDate={option.end} />
                 )}
               </th>
             ))}
@@ -43,8 +39,8 @@ export default function Survey(props: SurveyProps) {
 
           <tbody>
             {survey.members
-              .filter((member: any) => member.id !== authId)
-              .map((member: any) => {
+              .filter((member) => member.id !== authId)
+              .map((member) => {
                 return (
                   <tr>
                     <th className="text-start border">{member.name}</th>

@@ -15,3 +15,7 @@ type Story = StoryObj<typeof Survey>;
 export const Default: Story = {
   render: () => <Survey survey={survey} />,
 };
+
+export const range: Story = {
+  render: () => <Survey survey={survey} />,
+};

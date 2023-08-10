@@ -1,4 +1,3 @@
-// React
 // 3rd party
 import classnames from "classnames";
 // Components
@@ -10,13 +9,13 @@ interface Props {
   type: "button" | "submit";
   kind: "primary" | "secondary";
   label: string;
-  href: string;
+  href?: string;
   className?: string;
   styles?: object;
   size?: "sm" | "md" | "lg";
   pending?: boolean;
   disabled?: boolean;
-  onClick?: any;
+  onClick(): Promise<void> | Event;
 }
 
 export default function Button(props: Props) {

@@ -1,8 +1,8 @@
 export default interface SurveyOption {
   id: string;
   title?: string;
-  start?: Date | undefined;
-  end?: Date | undefined;
+  start: Date;
+  end: Date;
   description?: string;
   // User ids
   accept: string[];

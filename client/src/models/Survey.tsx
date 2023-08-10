@@ -1,8 +1,15 @@
 import SurveyOption from "./SurveyOption";
-import SurveyOptionModel from "./SurveyOption";
+
+interface SurveyMember {
+  id: string;
+  name: string;
+}
 
 export default interface Survey {
+  title: string;
+  display: "name" | "date";
+  showYear?: boolean;
+  showTime?: boolean;
   options: SurveyOption[];
-  dateType: "date" | "time" | "dateAndTime";
-  members: { id: string; name: string }[];
+  members: SurveyMember[];
 }
